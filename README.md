@@ -27,3 +27,13 @@ The app displays the current weather for **San Francisco, CA**, and allows the u
 - SwiftUI  
 
 ---
+
+## 🎓 Learning Outcomes
+
+While building this basic project, I learned:
+- How to structure a basic SwiftUI project  
+- Using **Stacks (HStack, VStack, ZStack)** for layout  
+- Applying conditional rendering (Day Mode vs. Night Mode)  
+- Styling views with gradients, colors, and system icons  
+- Handling user interactions with **@State**  
+- Creating a clean and minimal UI with SwiftUI components  
