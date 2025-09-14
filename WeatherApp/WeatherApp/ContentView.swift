@@ -8,30 +8,22 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var isNightModeOn = false
+    
     var body: some View {
         ZStack {
-            BackgroundView(topColor: .blue, middleColor: .cyan, bottomColor: Color("lightblue"),)
+            BackgroundView(topColor: isNightModeOn ? .black : .blue,
+                           bottomColor: isNightModeOn ? .white : Color("lightblue")
+            )
+            
+            
             VStack {
-                Text("San Francisco, CA")
-                    .font(.system(size: 32, weight: .medium, design: .default))
-                    .foregroundColor(.white)
-                    .padding()
+               CityTextView(cityName: "San Francisco, CA")
                 
-                
-                VStack(spacing: 8) {
-                    Image(systemName: "cloud.sun.fill")
-                        .renderingMode(.original)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 180, height: 180)
+                WeatherStatusView(image: isNightModeOn ? "moon.stars.fill": "cloud.sun.fill",
+                                  temperature: 63)
                     
-                    Text("65°").font(.system(size: 70, weight: .medium))
-                        .foregroundColor(.white)
-                    
-                }
-                .padding(.bottom,40)
-           
-                
         
                 HStack(spacing: 18) {
                     WeatherDayView(dayOfWeek: "TUE",
@@ -53,29 +45,21 @@ struct ContentView: View {
                                    imageName: "cloud.drizzle.fill",
                                    temperature: 47)
                     
-                    
                 }
                 Spacer()
                 
                 Button {
-                    
+                    // toggle between true and false
+                    isNightModeOn.toggle()
                 } label: {
-                    Text("Change Day Time")
-                        .frame(width:280,height:50)
-                        .background(Color.white)
-                        .font(.system(size:20, weight: .bold, design: .default))
-                        .cornerRadius(10)
-                    
+                    ButtonView(buttonText: "Change Day Time",
+                               textColor: .blue,
+                               backgroundColor: Color.white,
+                              )
+        
                 }
                 
                 Spacer()
-                
-                
-                
-                
-                
-                
-                
                 
             }
         }
@@ -114,12 +98,62 @@ struct WeatherDayView: View {
 struct BackgroundView: View {
     
     var topColor: Color
-    var middleColor: Color
     var bottomColor: Color
     
     
     var body: some View {
-        LinearGradient(gradient: Gradient(colors: [topColor,middleColor,bottomColor ]), startPoint: .topLeading, endPoint: .bottomTrailing)
+        LinearGradient(gradient: Gradient(colors: [topColor,bottomColor ]), startPoint: .topLeading, endPoint: .bottomTrailing)
             .edgesIgnoringSafeArea(.all)
     }
 }
+
+
+struct CityTextView: View {
+    
+    var cityName: String
+    var body: some View {
+        Text(cityName)
+            .font(.system(size: 32, weight: .medium, design: .default))
+            .foregroundColor(.white)
+            .padding()
+        
+    }
+}
+struct WeatherStatusView: View {
+    
+    var image: String
+    var temperature: Int
+    var body: some View {
+        VStack(spacing: 8) {
+            Image(systemName: image)
+                .renderingMode(.original)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 180, height: 180)
+            
+            Text("\(temperature)°").font(.system(size: 70, weight: .medium))
+                .foregroundColor(.white)
+        }
+        .padding(.bottom,40)
+   
+    }
+}
+struct ButtonView: View {
+    
+    var buttonText: String
+    var textColor: Color
+    var backgroundColor: Color
+    
+    var body: some View {
+        Text(buttonText)
+            .frame(width:280,height:50)
+            .background(backgroundColor)
+            .foregroundColor(textColor)
+            .font(.system(size:20, weight: .bold, design: .default))
+            .cornerRadius(10)
+        
+        
+    }
+}
+
+
