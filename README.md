@@ -18,7 +18,7 @@ The app displays the current weather for **San Francisco, CA**, and allows the u
 
 | Day Mode | Night Mode |
 |----------|------------|
-| <img src="Simulator Screenshot - iPhone 16 Plus - 2025-09-14 at 14.24.00.jpeg" width="300"> | <img src="Simulator Screenshot - iPhone 16 Plus - 2025-09-14 at 14.24.02.jpeg" width="300"> |
+| <img src="dayMode.png" width="300"> | <img src="nightMode.png" width="300"> |
 
 ---
 
